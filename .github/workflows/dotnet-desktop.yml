@@ -20,7 +20,7 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Restore dependencies
-        run: dotnet restore lab_1/WebApplication.sln
+        run: dotnet restore lab_1/WebApplication/WebApplication.csproj
 
       - name: Build
         run: dotnet build --configuration Release --no-restore
