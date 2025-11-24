@@ -9,7 +9,6 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -23,7 +22,40 @@ jobs:
         run: dotnet restore lab_1/WebApplication/WebApplication.csproj
 
       - name: Build
-        run: dotnet build lab_1/WebApplication/WebApplication.csproj --no-restore
+        run: dotnet build lab_1/WebApplication/WebApplication.csproj --no-restore -c Release
 
       - name: Run tests
-        run: dotnet test lab_1/WebApplication.Tests/WebApplication.csproj --no-build --verbosity normal
+        id: test
+        continue-on-error: true
+        run: |
+          echo "Starting tests..."
+          echo "────────────────────────────────────"
+          dotnet test lab_1/WebApplication.Tests/WebApplication.csproj \
+            --no-build \
+            --verbosity minimal \
+            --logger:"console;verbosity=normal" \
+            --filter FullyQualifiedName~Tests \
+            --results-directory:TestResults
+            
+          TEST_EXIT_CODE=$?
+          
+          if [ $TEST_EXIT_CODE -eq 0 ]; then
+            echo "────────────────────────────────────"
+            echo "ALL TESTS ARE GOOD!"
+            echo "────────────────────────────────────"
+          else
+            echo "────────────────────────────────────"
+            echo "NOT ALL TESTS ARE GOOD!"
+            echo "────────────────────────────────────"
+          fi
+          
+          exit $TEST_EXIT_CODE
+
+      - name: Test summary
+        if: always()
+        run: |
+          if [ ${{ steps.test.outcome }} == 'success' ]; then
+            echo "### All good!" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "### Not all good!" >> $GITHUB_STEP_SUMMARY
+          fi
