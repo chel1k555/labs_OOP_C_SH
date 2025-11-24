@@ -23,7 +23,7 @@ jobs:
         run: dotnet restore lab_1/WebApplication/WebApplication.csproj
 
       - name: Build
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build lab_1/WebApplication/WebApplication.csproj --no-restore
 
       - name: Run tests
-        run: dotnet test --configuration Release --no-build --verbosity normal
+        run: dotnet test lab_1/WebApplication.Tests/WebApplication.csproj --no-build --verbosity normal
