@@ -7,7 +7,7 @@ namespace WebApplication.Classes{
         private List<Student> Students = new List<Student>();
         private List<Teacher> Teachers = new List<Teacher>();
 
-        protected Course(string name)
+        public Course(string name)
         {
             Name = name;
         }
@@ -76,4 +76,5 @@ namespace WebApplication.Classes{
             Teachers.Clear();
         }
     }
+
 }
