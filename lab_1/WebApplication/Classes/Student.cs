@@ -61,6 +61,6 @@ namespace WebApplication.Classes{
             return;
         }
 
-        ~Student(){}
     }
+
 }
