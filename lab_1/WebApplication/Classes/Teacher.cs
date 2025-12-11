@@ -59,6 +59,6 @@ namespace WebApplication.Classes {
             return;
         }        
 
-        ~Teacher(){}
     }
+
 }
