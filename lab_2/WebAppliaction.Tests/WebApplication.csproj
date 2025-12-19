@@ -16,7 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WebApplication\WebApplication.csproj" />
+    <ProjectReference Include="..\lab_2\WebApplication\WebApplication.csproj" />
   </ItemGroup>
 
 </Project>
+
