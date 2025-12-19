@@ -1,4 +1,3 @@
-
 name: .NET Tests
 
 on:
@@ -20,10 +19,10 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Restore dependencies
-        run: dotnet restore lab_1/WebApplication/WebApplication.csproj
+        run: dotnet restore lab_2/WebApplication/WebApplication.csproj
 
       - name: Build
-        run: dotnet build lab_1/WebApplication/WebApplication.csproj --no-restore -c Release
+        run: dotnet build lab_2/WebApplication/WebApplication.csproj --no-restore -c Release
 
       - name: Run tests
         id: test
@@ -31,7 +30,7 @@ jobs:
         run: |
           echo "Starting tests..."
           echo "────────────────────────────────────"
-          dotnet test lab_1/WebApplication.Tests/WebApplication.csproj \
+          dotnet test lab_2/WebApplication.Tests/WebApplication.csproj \
             --no-build \
             --verbosity minimal \
             --logger:"console;verbosity=normal" \
