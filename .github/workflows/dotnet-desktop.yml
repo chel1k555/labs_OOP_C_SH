@@ -1,4 +1,4 @@
-name: .NET Tests
+name: .NET Core CI
 
 on:
   push:
@@ -7,55 +7,22 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '8.0.x'
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
 
-      - name: Restore dependencies
-        run: dotnet restore lab_2/WebApplication/WebApplication.csproj
+    - name: Restore dependencies
+      run: dotnet restore lab_2/WebApplication.sln
 
-      - name: Build
-        run: dotnet build lab_2/WebApplication/WebApplication.csproj --no-restore -c Release
+    - name: Build
+      run: dotnet build lab_2/WebApplication.sln --no-restore --configuration Release
 
-      - name: Run tests
-        id: test
-        continue-on-error: true
-        run: |
-          echo "Starting tests..."
-          echo "────────────────────────────────────"
-          dotnet test lab_2/WebApplication.Tests/WebApplication.csproj \
-            --no-build \
-            --verbosity minimal \
-            --logger:"console;verbosity=normal" \
-            --filter FullyQualifiedName~Tests \
-            --results-directory:TestResults
-            
-          TEST_EXIT_CODE=$?
-          
-          if [ $TEST_EXIT_CODE -eq 0 ]; then
-            echo "────────────────────────────────────"
-            echo "ALL TESTS ARE GOOD!"
-            echo "────────────────────────────────────"
-          else
-            echo "────────────────────────────────────"
-            echo "NOT ALL TESTS ARE GOOD!"
-            echo "────────────────────────────────────"
-          fi
-          
-          exit $TEST_EXIT_CODE
-
-      - name: Test summary
-        if: always()
-        run: |
-          if [ ${{ steps.test.outcome }} == 'success' ]; then
-            echo "### All good!" >> $GITHUB_STEP_SUMMARY
-          else
-            echo "### Not all good!" >> $GITHUB_STEP_SUMMARY
-          fi
+    - name: Test
+      run: dotnet test lab_2/WebApplication.sln --no-build --configuration Release --verbosity normal
