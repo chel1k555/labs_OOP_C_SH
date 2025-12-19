@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAppllication", "WebApplication.csproj", "{19317912-AC4B-45A3-1276-85453B678B5B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication", "WebAppllication/WebApplication.csproj", "{19317912-AC4B-45A3-1276-85453B678B5B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,4 +22,5 @@ Global
 		SolutionGuid = {8259A2D6-4040-458C-A541-D1C5EE36EE4B}
 	EndGlobalSection
 EndGlobal
+
 
