@@ -15,6 +15,11 @@ namespace WebApplication.Classes_For_IN
 
         public void Use_Item(Player player)
         {
+            if(Count_Use == 0)
+            {
+                return;
+            }
+            Count_Use -= 1;
             if(Typee == 1)
             {
                 player.add_heal(Effect);
