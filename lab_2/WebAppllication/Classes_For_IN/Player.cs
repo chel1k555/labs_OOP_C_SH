@@ -185,12 +185,12 @@ namespace WebApplication.Classes_For_IN
             }
         }
 
-        public bool Clear_Inventory_Testable()
+        public bool Clear_Inventory()
         {
             bool arm = this.Unequip_Armor();
             bool wep = this.Unequip_Weapon();
             bool inv = Inventory.Clear_Inv(true);
-            if(arm && wep && inv){return true;}
+            if(inv){return true;}
             return false;
         }
 
@@ -200,4 +200,5 @@ namespace WebApplication.Classes_For_IN
         }
 
     }
+
 }
